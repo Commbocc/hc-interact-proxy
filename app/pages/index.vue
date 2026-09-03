@@ -31,7 +31,7 @@ const { data: appLinks } = useFetch(`/api/v1/apps`, { query: { limit: 9 } });
     <UPageSection
       id="features"
       title="Suggested Reading"
-      description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam vitae ad hic dicta cumque aliquid eos sunt rerum dolor eius, mollitia magni unde, ipsa, quibusdam molestias aperiam soluta quaerat illo."
+      description="Explore resources and information selected for external agency users."
     >
       <template #body>
         <SuggestedContent />
@@ -40,7 +40,7 @@ const { data: appLinks } = useFetch(`/api/v1/apps`, { query: { limit: 9 } });
 
     <UPageSection
       title="Applications"
-      description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam vitae ad hic dicta cumque aliquid eos sunt rerum dolor eius, mollitia magni unde, ipsa, quibusdam molestias aperiam soluta quaerat illo."
+      description="Access the applications and tools available to you."
     >
       <template #features>
         <UserLinks :links="appLinks?.Items" />

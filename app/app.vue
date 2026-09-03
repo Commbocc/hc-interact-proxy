@@ -40,7 +40,7 @@ const open = ref(false);
           <UDashboardNavbar :ui="{ right: 'gap-3' }">
             <template #title>
               <NuxtLink to="/">
-                <img src="/login-logo.png" alt="" class="w-auto h-10" />
+                <img src="/logo.png" alt="" class="w-auto h-10" />
               </NuxtLink>
             </template>
 
