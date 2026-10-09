@@ -19,7 +19,7 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-// await navigateTo(`/Interact?q=${Date.now()}`);
+await navigateTo(`/Interact?q=${Date.now()}`);
 </script>
 
 <template>
