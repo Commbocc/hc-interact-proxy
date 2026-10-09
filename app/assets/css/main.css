@@ -2,3 +2,7 @@
 @import "@nuxt/ui";
 
 @plugin "@tailwindcss/typography";
+
+:root {
+  --ui-primary: rgb(32, 66, 111);
+}
