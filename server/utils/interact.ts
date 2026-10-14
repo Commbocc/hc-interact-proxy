@@ -23,12 +23,18 @@ export const useInteractClient = () => {
  * the API with an Authorization header set.
  */
 export const useInteractAuthenticatedClient = () => {
-  const { interactApiEndpoint, interactTenantGuid } = useRuntimeConfig();
+  const {
+    public: { interactOperatingUserId },
+    interactApiEndpoint,
+    interactTenantGuid,
+  } = useRuntimeConfig();
 
   return $fetch.create({
     baseURL: interactApiEndpoint,
     async onRequest({ options }) {
-      const { access_token } = await fetchInteractAccessToken();
+      const { access_token } = await fetchInteractAccessToken(
+        interactOperatingUserId
+      );
 
       options.headers.set("X-Tenant", interactTenantGuid);
       options.headers.set("Authorization", `Bearer ${access_token}`);
@@ -44,12 +50,8 @@ export const useInteractAuthenticatedClient = () => {
  *
  * @returns A promise resolving to the Interact access token response.
  */
-export async function fetchInteractAccessToken() {
-  const {
-    public: { interactOperatingUserId },
-    interactAdminApiKey,
-    interactAdminApiSecret,
-  } = useRuntimeConfig();
+export async function fetchInteractAccessToken(personid: string) {
+  const { interactAdminApiKey, interactAdminApiSecret } = useRuntimeConfig();
   const client = useInteractClient();
 
   return client<{
@@ -71,7 +73,23 @@ export async function fetchInteractAccessToken() {
       context: "KeySecret",
     }),
     query: {
-      personid: interactOperatingUserId,
+      personid,
     },
   });
 }
+
+//
+
+export const useInteractAdminClient = () => {
+  const { interactApiEndpoint, interactTenantGuid } = useRuntimeConfig();
+
+  return $fetch.create({
+    baseURL: interactApiEndpoint,
+    async onRequest({ options }) {
+      const { access_token } = await fetchInteractAccessToken("323");
+
+      options.headers.set("X-Tenant", interactTenantGuid);
+      options.headers.set("Authorization", `Bearer ${access_token}`);
+    },
+  });
+};
